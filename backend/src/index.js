@@ -43,26 +43,46 @@ if (env.DEV) {
       email: "wyatt.goettsch@gmail.com",
     });
 
-    await user.createItem({
-      name: "bread",
-      price: 100,
-      quantity: 1,
+    const kitchen = await user.createFridge({
+      name: "kitchen",
     });
 
-    await user.createItem({
+    const garage = await user.createFridge({
+      name: "garage",
+    });
+
+    await kitchen.createItem({
       name: "cheese",
       price: 100,
       quantity: 1,
     });
 
-    await user.createItem({
+    await kitchen.createItem({
       name: "kechup",
       price: 100,
       quantity: 1,
     });
 
-    const items = await user.getItems();
-    console.log(items.map((e) => e.toJSON()));
+    await kitchen.createItem({
+      name: "milk",
+      price: 100,
+      quantity: 1,
+    });
+
+    await garage.createItem({
+      name: "pickles",
+      price: 100,
+      quantity: 1,
+    });
+
+    await garage.createItem({
+      name: "meat",
+      price: 100,
+      quantity: 1,
+    });
+
+    // const items = await user.getItems();
+    // console.log(items.map((e) => e.toJSON()));
 
     server.get(
       //

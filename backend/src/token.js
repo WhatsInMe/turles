@@ -8,7 +8,7 @@ function newAccessToken(user) {
     },
     env.SECRET_ACCESSTOKEN,
     {
-      expiresIn: env.DEV ? "15s" : "15m",
+      expiresIn: env.DEV ? "60s" : "15m",
     }
   );
 }
@@ -22,7 +22,7 @@ function newRefreshToken(user) {
     env.SECRET_REFRESHTOKEN,
     {
       // expiresIn: "1m",
-      expiresIn: env.DEV ? "30s" : "24h",
+      expiresIn: env.DEV ? "90s" : "24h",
     }
   );
 }

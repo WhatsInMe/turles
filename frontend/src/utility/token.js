@@ -11,13 +11,19 @@ function setAccessToken(token) {
 
 function isTokenValid() {
   const token = getAccessToken();
+
   if (!token) {
     return false;
   }
-  const {
-    payload: { exp },
-  } = jwt.decode(token, { complete: true });
-  return new Date().getTime() < exp * 1000;
+
+  const decoded = jwt.decode(token, { complete: true });
+  const exp = decoded.payload.exp * 1000 - 20000;
+  const now = new Date().getTime();
+
+  // console.log(now.getTime());
+  // console.log(exp);
+
+  return now < exp;
 }
 
 export { getAccessToken, setAccessToken, isTokenValid };

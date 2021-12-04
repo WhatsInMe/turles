@@ -84,16 +84,17 @@ const Item = sequelize.define("item", {
   },
 });
 
-Item.belongsTo(User, {
-  foreignKey: "userId",
+Item.belongsTo(Fridge, {
+  foreignKey: "fridgeId",
 });
-User.hasMany(Item, {
-  foreignKey: "userId",
+Fridge.hasMany(Item, {
+  foreignKey: "fridgeId",
 });
 
 const db = {
-  User: User,
   Fridge: Fridge,
+  Item: Item,
+  User: User,
   Sequelize: Sequelize,
   sequelize: sequelize,
 };

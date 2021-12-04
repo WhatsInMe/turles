@@ -16,7 +16,8 @@ axios.defaults.withCredentials = true;
 function App() {
   const [loggedIn, setLoggedIn] = React.useState(false);
 
-  const delay = dev ? 10000 : (60000 * 10);
+  // const delay = dev ? 10000 : (60000 * 10);
+  const delay = 10000;
 
   React.useEffect(() => {
     async function checkLogin() {
@@ -30,7 +31,7 @@ function App() {
     }, delay);
 
     return () => clearInterval(interval);
-  }, [delay, loggedIn]);
+  }, [loggedIn]);
 
   return (
     <div>
