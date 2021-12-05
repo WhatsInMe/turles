@@ -2,28 +2,19 @@ import axios from "axios";
 
 import { getAccessToken } from "../utility/token";
 
-const requestType = {
-  account: ["get", "/auth/account"],
-  fridge: ["get", "/auth/fridge"],
-  item: ["get", "/auth/item"],
-  addFridge: ["post", "/auth/fridge"],
-  addItem: ["post", "/auth/fridge"],
-};
-
 const getHeader = () => ({
   headers: {
     Authorization: `Bearer ${getAccessToken()}`,
   },
 });
 
-export async function request({ body, id, type }) {
-  const [method, uri] = requestType[type];
+export async function authRequest(method, uri, body) {
+  const hasBody = !(method === "get" || method === "delete");
   try {
     const res = await axios[method](
-      //
-      `${uri}${id ? "/" + id : ""}`,
-      method === "get" ? getHeader() : body,
-      method === "get" ? null : getHeader()
+      uri,
+      hasBody ? body : getHeader(),
+      hasBody ? getHeader() : null
     );
     return res;
   } catch (e) {
@@ -31,10 +22,18 @@ export async function request({ body, id, type }) {
   }
 }
 
-export async function addFridge({ body, id }) {
-  return request({ body, id, type: "addFridge" });
+export async function getFridges() {
+  return await authRequest("get", "/auth/fridge");
 }
 
-export async function addItem({ body, id }) {
-  return request({ body, id, type: "addItem" });
+export async function addFridge(name) {
+  return await authRequest("post", "/auth/fridge", { name });
+}
+
+export async function getFridge(name) {
+  return await authRequest("get", `/auth/fridge/${name}`);
+}
+
+export async function addItem(fridge, item) {
+  return await authRequest("post", `/auth/fridge/${fridge}`, item);
 }

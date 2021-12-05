@@ -1,19 +1,19 @@
 import React from "react";
 
-import { request } from "../utility/request";
+import * as request from "../utility/request";
 
-export default function Query({ body, children, id, type }) {
+export default function Query({ children, fridge, type }) {
   const [data, setData] = React.useState();
+
+  const method = `get${type.charAt(0).toUpperCase() + type.slice(1)}`;
 
   React.useEffect(() => {
     async function load() {
-      const res = await request({ body, id, type });
-      if (res) {
-        setData(res.data);
-      }
+      const res = await request[method](fridge);
+      setData(res?.data);
     }
     load();
-  }, [body, id, type]);
+  }, [fridge, method]);
 
   const childrenWithProps = React.Children.map(
     //
