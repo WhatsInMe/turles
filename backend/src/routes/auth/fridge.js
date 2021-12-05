@@ -4,15 +4,6 @@ const { StatusCodes } = require("http-status-codes");
 
 const router = express.Router();
 
-router.use(
-  //
-  async (req, res, next) => {
-    const user = await User.findByPk(req.userId);
-    req.User = user;
-    next();
-  }
-);
-
 router.get(
   //
   "/",
