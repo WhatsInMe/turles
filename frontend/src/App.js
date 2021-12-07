@@ -1,4 +1,4 @@
-import 'bootstrap/dist/css/bootstrap.min.css';
+import "bootstrap/dist/css/bootstrap.min.css";
 import React from "react";
 import axios from "axios";
 import { BrowserRouter as Router, Link, Route, Routes } from "react-router-dom";
@@ -8,7 +8,7 @@ import About from "./components/about";
 import Dev from "./components/dev";
 import Home from "./components/home";
 import Login from "./components/login/login";
-import { dev } from "./utility/constants";
+import Register from "./components/register/register";
 import { isLoggedIn } from "./utility/login";
 
 axios.defaults.baseURL = "http://localhost:3001";
@@ -37,7 +37,12 @@ function App() {
   return (
     <div>
       {!loggedIn ? (
-        <Login />
+        <Router>
+          <Routes>
+            <Route exact path="/" element={<Login />} />
+            <Route exact path="/register" element={<Register />} />
+          </Routes>
+        </Router>
       ) : (
         <Router>
           <div>

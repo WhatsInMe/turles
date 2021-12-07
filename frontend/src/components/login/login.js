@@ -1,4 +1,5 @@
 import React from "react";
+import { useNavigate } from "react-router";
 
 import "./login.css";
 import { Button, Form } from "react-bootstrap";
@@ -7,6 +8,8 @@ import { login } from "../../utility/login";
 export default function Login() {
   const [username, setUsername] = React.useState("");
   const [password, setPassword] = React.useState("");
+
+  const navigate = useNavigate();
 
   return (
     <div className="d-flex flex-column justify-content-center mx-auto login">
@@ -34,9 +37,8 @@ export default function Login() {
         <Button
           className="mb-3"
           variant="primary"
-          // type="submit"
           onClick={async (e) => {
-            e.preventDefault();
+            // e.preventDefault();
             await login(username, password);
             window.location.reload(true);
           }}
@@ -48,6 +50,7 @@ export default function Login() {
           //
           className="mb-3"
           variant="secondary"
+          onClick={() => navigate("/register")}
         >
           Register
         </Button>
