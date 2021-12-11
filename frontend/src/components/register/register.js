@@ -1,7 +1,13 @@
 import React from "react";
+import axios from "axios";
 import { Form, Row, Col, Button} from "react-bootstrap";
-import "./register.css" 
+
+import "./register.css";
+
 export default function Register(props) {
+  const [username, setUsername] = React.useState("");
+  const [password, setPassword] = React.useState("");
+
   return (
     <div className="d-flex flex-column justify-content-center mx-auto register">
       <Form>
@@ -19,19 +25,40 @@ export default function Register(props) {
 
         <Form.Group className="mb-3" controlId="formGridUsername">
           <Form.Label>Username</Form.Label>
-          <Form.Control type="text" placeholder="Enter Username"></Form.Control>
+          <Form.Control 
+            type="text" 
+            placeholder="Enter Username"
+            onChange={ e=> {
+              setUsername(e.target.value);
+              console.log(username);
+            }}
+          />
         </Form.Group>
 
         <Form.Group className="mb-3" controlId="formGridPassword">
           <Form.Label>Password</Form.Label>
-          <Form.Control type="password" placeholder="Password" />
+          <Form.Control 
+            type="password"
+            placeholder="Password"
+            onChange={ e => {
+              setPassword(e.target.value);
+              console.log(password);
+            }}
+          />
         </Form.Group>
         
-        <Button variant="primary" type="submit">
+        <Button
+          variant="primary"
+          onClick={ async () => {
+            const res = await axios.post('/register', {
+              username,
+              password
+            });
+            console.log(res);
+          }}
+        >
           Submit
         </Button>
-
-
       </Form>
     </div>
   );
