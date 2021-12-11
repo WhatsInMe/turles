@@ -1,6 +1,6 @@
 import React from "react";
 import axios from "axios";
-import { Form, Row, Col, Button} from "react-bootstrap";
+import { Form, Row, Col, Button } from "react-bootstrap";
 
 import "./register.css";
 
@@ -14,7 +14,10 @@ export default function Register(props) {
         <Row className="mb-3">
           <Form.Group as={Col} controlId="formGridFirstName">
             <Form.Label>First Name</Form.Label>
-            <Form.Control type="text" placeholder="Enter First Name"></Form.Control>
+            <Form.Control
+              type="text"
+              placeholder="Enter First Name"
+            ></Form.Control>
           </Form.Group>
 
           <Form.Group as={Col} controlId="formGridLastName">
@@ -25,10 +28,10 @@ export default function Register(props) {
 
         <Form.Group className="mb-3" controlId="formGridUsername">
           <Form.Label>Username</Form.Label>
-          <Form.Control 
-            type="text" 
+          <Form.Control
+            type="text"
             placeholder="Enter Username"
-            onChange={ e=> {
+            onChange={(e) => {
               setUsername(e.target.value);
               console.log(username);
             }}
@@ -37,22 +40,22 @@ export default function Register(props) {
 
         <Form.Group className="mb-3" controlId="formGridPassword">
           <Form.Label>Password</Form.Label>
-          <Form.Control 
+          <Form.Control
             type="password"
             placeholder="Password"
-            onChange={ e => {
+            onChange={(e) => {
               setPassword(e.target.value);
               console.log(password);
             }}
           />
         </Form.Group>
-        
+
         <Button
           variant="primary"
-          onClick={ async () => {
-            const res = await axios.post('/register', {
+          onClick={async () => {
+            const res = await axios.post("/register", {
               username,
-              password
+              password,
             });
             console.log(res);
           }}
