@@ -22,9 +22,6 @@ const User = sequelize.define("user", {
     allowNull: false,
     defaultValue: 0,
   },
-});
-
-const Settings = sequelize.define("settings", {
   firstName: {
     type: DataTypes.STRING,
     allowNull: false,
@@ -37,6 +34,9 @@ const Settings = sequelize.define("settings", {
     type: DataTypes.STRING,
     allowNull: false,
   },
+});
+
+const Settings = sequelize.define("settings", {
   darkmode: {
     type: DataTypes.BOOLEAN,
     allowNull: false,
