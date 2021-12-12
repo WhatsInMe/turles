@@ -5,27 +5,15 @@ import { Form, Row, Col, Button } from "react-bootstrap";
 import "./register.css";
 
 export default function Register(props) {
-  const [username, setUsername] = React.useState("");
-  const [password, setPassword] = React.useState("");
+  const [username, setUsername] = React.useState();
+  const [password, setPassword] = React.useState();
+  const [firstName, setFirstName] = React.useState();
+  const [lastName, setLastName] = React.useState();
+  const [email, setEmail] = React.useState();
 
   return (
     <div className="d-flex flex-column justify-content-center mx-auto register">
       <Form>
-        <Row className="mb-3">
-          <Form.Group as={Col} controlId="formGridFirstName">
-            <Form.Label>First Name</Form.Label>
-            <Form.Control
-              type="text"
-              placeholder="Enter First Name"
-            ></Form.Control>
-          </Form.Group>
-
-          <Form.Group as={Col} controlId="formGridLastName">
-            <Form.Label>Last Name</Form.Label>
-            <Form.Control type="text" placeholder="Enter Last Name" />
-          </Form.Group>
-        </Row>
-
         <Form.Group className="mb-3" controlId="formGridUsername">
           <Form.Label>Username</Form.Label>
           <Form.Control
@@ -50,12 +38,54 @@ export default function Register(props) {
           />
         </Form.Group>
 
+        <Row className="mb-3">
+          <Form.Group as={Col} controlId="formGridFirstName">
+            <Form.Label>First Name</Form.Label>
+            <Form.Control
+              type="text"
+              placeholder="Enter First Name"
+              onChange={(e) => {
+                setFirstName(e.target.value);
+                console.log(firstName);
+              }}
+            ></Form.Control>
+          </Form.Group>
+
+          <Form.Group as={Col} controlId="formGridLastName">
+            <Form.Label>Last Name</Form.Label>
+            <Form.Control
+              //
+              type="text"
+              placeholder="Enter Last Name"
+              onChange={(e) => {
+                setLastName(e.target.value);
+                console.log(lastName);
+              }}
+            />
+          </Form.Group>
+        </Row>
+
+        <Form.Group className="mb-3" controlId="formGridEmail">
+          <Form.Label>Email</Form.Label>
+          <Form.Control
+            type="text"
+            placeholder="Enter Email"
+            onChange={(e) => {
+              setEmail(e.target.value);
+              console.log(email);
+            }}
+          />
+        </Form.Group>
+
         <Button
           variant="primary"
           onClick={async () => {
             const res = await axios.post("/register", {
               username,
               password,
+              firstName,
+              lastName,
+              email,
             });
             console.log(res);
           }}

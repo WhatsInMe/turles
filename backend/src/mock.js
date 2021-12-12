@@ -5,6 +5,9 @@ async function seed() {
   await db.User.create({
     username: "wyatt",
     password: await hash("pass", 12),
+    firstName: "Wyatt",
+    lastName: "Goettsch",
+    email: "wyatt.goettsch@gmail.com",
   });
 
   const user = await db.User.findOne({
@@ -13,17 +16,7 @@ async function seed() {
     },
   });
 
-  // await user.createUserInfo({
-  //   firstName: "Wyatt",
-  //   lastName: "Goettsch",
-  //   email: "wyatt.goettsch@gmail.com",
-  // });
-
-  await user.createSettings({
-    firstName: "Wyatt",
-    lastName: "Goettsch",
-    email: "wyatt.goettsch@gmail.com",
-  });
+  await user.createSettings();
 
   const kitchen = await user.createFridge({
     name: "kitchen",
