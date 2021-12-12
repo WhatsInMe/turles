@@ -11,9 +11,23 @@ export default function Register(props) {
   const [lastName, setLastName] = React.useState();
   const [email, setEmail] = React.useState();
 
+  async function handleSubmit(event) {
+    event.preventDefault();
+    
+    const res = await axios.post("/register", {
+      username,
+      password,
+      firstName,
+      lastName,
+      email,
+    });
+
+    console.log(res);
+  }
+
   return (
     <div className="d-flex flex-column justify-content-center mx-auto register">
-      <Form>
+      <Form onSubmit={handleSubmit}>
         <Form.Group className="mb-3" controlId="formGridUsername">
           <Form.Label>Username</Form.Label>
           <Form.Control
@@ -78,17 +92,9 @@ export default function Register(props) {
         </Form.Group>
 
         <Button
+          //
+          type="submit"
           variant="primary"
-          onClick={async () => {
-            const res = await axios.post("/register", {
-              username,
-              password,
-              firstName,
-              lastName,
-              email,
-            });
-            console.log(res);
-          }}
         >
           Submit
         </Button>
